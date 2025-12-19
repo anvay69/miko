@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<!-- <script>const mikoCsrf = "{{ csrf }}"</script> -->
+
+<style>
+    .difficulty-option {
+        cursor: pointer;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: purple;
+        /* Default color */
+        color: white;
+        /* Text color */
+        transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+        text-align: center;
+        /* Center text */
+    }
+
+    .difficulty-option:hover {
+        background-color: #6f42c1;
+        /* Darker purple on hover */
+    }
+
+    .difficulty-option.selected {
+        background-color: white;
+        /* Glow effect for selected option */
+        color: purple;
+        /* Change text color for selected */
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        /* Glow effect */
+    }
+
+    .hidden {
+        display: none !important;
+        /* Hides elements with this class */
+    }
+
+    .next-test-button {
+        margin-top: 1.5rem;
+        /* Space above the button */
+        padding: 10px 20px;
+        /* Padding inside the button */
+        font-size: 1rem;
+        /* Font size for the button text */
+        color: white;
+        /* Text color */
+        background-color: #007bff;
+        /* Button color */
+        border: none;
+        /* No border */
+        border-radius: 5px;
+        /* Rounded corners */
+        cursor: pointer;
+        /* Pointer cursor on hover */
+        transition: background-color 0.3s;
+        /* Smooth transition for hover effect */
+    }
+
+    .next-test-button:hover {
+        background-color: #0056b3;
+        /* Darker shade on hover */
+    }
+
+    #problemDisplay {
+    flex-grow: 5; /* Allow this element to grow more */
+}
+
+#answerInput {
+    flex-grow: 2; /* Allow this element to grow less */
+    /* min-width: 120px; /* Optional: Set a minimum width for the input */
+}
+
+</style>
+
+<div class="container mt-5">
+    <div class="mb-4 text-center" id="settings">
+        <label class="form-label">Select Difficulty</label>
+        <div class="difficulty-container d-flex justify-content-center mb-2">
+            <div class="difficulty-option selected" data-value="easy">Easy</div>
+            <div class="difficulty-option ms-3" data-value="medium">Medium</div>
+            <div class="difficulty-option ms-3" data-value="hard">Hard</div>
+        </div>
+    </div>
+
+    <div id="startMessage" class="border p-3 mb-4 text-center" style="min-height: 50px;">
+        <p class="text-muted" style="font-size: 1.2rem;">Press any key to begin</p>
+    </div>
+
+    <div class="d-flex flex-column align-items-center mb-4 hidden" id="gameArea">
+    <div class="d-flex justify-content-between w-100 mb-3">
+        <div id="questionCounter" class="text-left">
+            <p id="counterText" style="font-size: 1.2rem;">0/0</p>
+        </div>
+        <div id="timer" class="text-right">
+            <p style="font-size: 1.2rem;" id="timeDisplay">0s</p>
+        </div>
+    </div>
+    <div class="d-flex align-items-center justify-content-center w-100">
+        <div id="problemDisplay" class="border p-3 me-2 flex-grow-5" style="min-height: 50px;">
+            <!-- Problem text will be dynamically inserted here -->
+        </div>
+        <input type="text" id="answerInput" class="form-control border-0 flex-grow-2"
+            style="border-bottom: 2px solid #000; background: transparent;">
+    </div>
+</div>
+
+
+    <div id="resultSection" class="hidden text-center">
+        <div class="border p-3">
+            <h1 id="score" class="score-display">Score: 0</h1> <!-- Score in larger font -->
+            <div class="result-info">
+                <p id="timeTaken" class="info-text">Time Taken: 0s</p> <!-- Time taken -->
+                <p id="solvedCount" class="info-text">Solved: 0 / 0</p> <!-- Solved problems -->
+            </div>
+            <button id="nextTestButton" class="next-test-button">Next Test</button> <!-- Next Test button -->
+        </div>
+    </div>
+
+    <input id="mikoCsrf" type="hidden" value="{{ miko_csrf }}">
+</div>
+
+<script defer>
+    document.querySelectorAll('.difficulty-option').forEach(option => {
+        option.addEventListener('click', function () {
+            document.querySelectorAll('.difficulty-option').forEach(opt => {
+                opt.classList.remove('selected'); // Remove selected class from all
+            });
+            this.classList.add('selected'); // Add selected class to the clicked option
+        });
+    });
+</script>
+
+<script src="/static/js/game.js" defer></script>
+
+{% endblock %}

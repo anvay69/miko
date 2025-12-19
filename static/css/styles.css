@@ -1,0 +1,45 @@
+body {
+    background-color: #343a40; /* Dark background */
+    color: #ffffff; /* Light text color */
+}
+
+.navbar {
+    background-color: #6f42c1; /* Purple background for navbar */
+}
+
+.nav-link {
+    color: #ffffff; /* White text for links */
+}
+
+.nav-link:hover {
+    color: #d3d3d3; /* Light gray on hover */
+}
+
+.container {
+    max-width: 500px; /* Limit the width of the container */
+    margin: auto; /* Center the container */
+    padding: 20px;
+    background-color: #495057; /* Darker background for forms */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+.btn-primary {
+    background-color: #6f42c1; /* Purple button */
+    border-color: #6f42c1; /* Matching border color */
+}
+
+.btn-primary:hover {
+    background-color: #5a31a0; /* Darker purple on hover */
+    border-color: #5a31a0; /* Matching border color */
+}
+
+.alert {
+    background-color: #ffc107; /* Warning color */
+    color: #212529; /* Dark text for alerts */
+}
