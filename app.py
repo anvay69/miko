@@ -84,9 +84,7 @@ def login():
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        messages=get_flashed_messages()
-        print(messages)
-        return render_template("login.html", messages=messages)
+        return render_template("login.html", messages=get_flashed_messages())
 
 
 @app.route("/logout")
@@ -194,6 +192,47 @@ def submit():
     db.commit()
 
     return jsonify({"success": "Score stored"}), 201
+
+
+@app.route("/leaderboard")
+def leaderboard():
+    difficulty = request.args.get("difficulty")
+
+    if not difficulty or difficulty.lower() not in ["medium", "hard"]:
+        difficulty = "easy"
+    else:
+        difficulty = difficulty.lower()
+
+    db = get_db()
+    cursor = db.execute(
+        """SELECT u.username, l.score
+        FROM leaderboard l
+        JOIN users u ON l.user_id = u.id
+        WHERE l.difficulty = ?
+        ORDER BY l.score DESC
+        LIMIT 20""", (difficulty,)
+    )
+
+    leaderboard = cursor.fetchall()
+
+    return render_template("leaderboard.html", difficulty=difficulty, leaderboard=leaderboard)
+
+
+@app.route("/profile")
+@login_required
+def profile():
+    pass
+
+
+@app.route("/history")
+@login_required
+def history():
+    user_id = session.get("user_id")
+    db = get_db()
+    cursor = db.execute("SELECT * FROM scores WHERE user_id = ? ORDER BY timestamp DESC", (user_id,))
+
+    data = cursor.fetchall()
+    return render_template("history.html", data=data)
 
 
 if __name__ == "__main__":

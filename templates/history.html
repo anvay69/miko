@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1 class="text-center">History</h1>
+
+    <table class="table table-dark table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Score</th>
+                <th scope="col">Time Used</th>
+                <th scope="col">Solved</th>
+                <th scope="col">Difficulty</th>
+                <th scope="col">Taken On</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in data %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ entry.score }}</td>
+                    <td>{{ entry.time_used }} sec</td>
+                    <td>{{ entry.solved }}/{{ entry.total }}</td>
+                    <td>{{ entry.difficulty }}</td>
+                    <td>{{ entry.timestamp }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -3,7 +3,8 @@ let startMsg = document.querySelector("#startMessage");
 let gameArea = document.querySelector("#gameArea");
 let resultArea = document.querySelector("#resultSection");
 
-let totalProblems;
+let totalProblems = 5;
+let timePerProblem = 15000;
 let solvedProblems;
 let startTime;
 let tInterval;
@@ -61,12 +62,12 @@ function getProblems(numProblems, difficulty) {
             max = 10; // One to two-digit numbers
             break;
         case 'medium':
-            min = 10;  // Allow two-digit and above
-            max = 999; // Two to three-digit numbers
+            min = 1;  // Allow two-digit and above
+            max = 10; // Two to three-digit numbers
             break;
         case 'hard':
-            min = 100; // Allow three-digit and above
-            max = 9999; // Three to four-digit numbers
+            min = 1; // Allow three-digit and above
+            max = 10; // Three to four-digit numbers
             break;
         default:
             throw new Error('Invalid difficulty level. Please use "easy", "medium", or "hard".');
@@ -108,7 +109,6 @@ function getProblems(numProblems, difficulty) {
 
 function setUp() {
     score = 0;
-    totalProblems = 5;
     solvedProblems = 0;
     document.addEventListener("keydown", keyDownHandler);
     document.getElementById("timeDisplay").textContent = "0s";
@@ -164,7 +164,7 @@ function setProblem() {
         currAnswer = problem["solution"];
         
         pSetTime = new Date().getTime();
-        pTimeout = setTimeout(setProblem, 15000);
+        pTimeout = setTimeout(setProblem, timePerProblem);
 
     } else {
         gameOver();

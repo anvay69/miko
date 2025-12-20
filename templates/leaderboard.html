@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="container mt-5">
+    <h1 class="text-center">Leaderboard</h1>
+    
+    <div class="form-group">
+        <label for="difficultySelect">Select Difficulty:</label>
+        <select class="form-select" id="difficultySelect">
+            <option value="easy" {% if difficulty == 'easy' %} selected {% endif %}>Easy</option>
+            <option value="medium" {% if difficulty == 'medium' %} selected {% endif %}>Medium</option>
+            <option value="hard" {% if difficulty == 'hard' %} selected {% endif %}>Hard</option>
+        </select>
+    </div>
+
+    <table class="table table-dark table-striped mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Rank</th>
+                <th scope="col">Username</th>
+                <th scope="col">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in leaderboard %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ entry.username }}</td>
+                    <td>{{ entry.score }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<style>
+    .form-select {
+        background-color: #6f42c1; /* Purple background for select */
+        color: #ffffff; /* White text */
+    }
+    .form-select:focus {
+        background-color: #6f42c1; /* Purple on focus */
+        color: #ffffff; /* White text on focus */
+        border-color: #5a6268; /* Border color */
+    }
+</style>
+
+<script>
+    document.getElementById('difficultySelect').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const currentUrl = new URL(window.location.href);
+        
+        // Update the URL with the new difficulty parameter
+        currentUrl.searchParams.set('difficulty', selectedValue);
+        
+        // Reload the page with the updated URL
+        window.location.href = currentUrl.toString();
+    });
+</script>
+{% endblock %}

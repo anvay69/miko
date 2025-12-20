@@ -16,7 +16,8 @@ body {
 }
 
 .container {
-    max-width: 500px; /* Limit the width of the container */
+    min-width: 500px;
+    width: fit-content;
     margin: auto; /* Center the container */
     padding: 20px;
     background-color: #495057; /* Darker background for forms */
