@@ -221,7 +221,26 @@ def leaderboard():
 @app.route("/profile")
 @login_required
 def profile():
-    pass
+    user_id = session.get("user_id")
+    db = get_db()
+    username = db.execute("SELECT username FROM users WHERE id = ?", (user_id,)).fetchone()[0]
+
+    stats = db.execute(
+        """SELECT 
+            difficulty,
+            MAX(score) AS highest_score,
+            AVG(score) AS average_score,
+            COUNT(*) AS total_tests
+        FROM 
+            scores
+        WHERE 
+            user_id = ?
+        GROUP BY 
+            difficulty;
+        """, (user_id,)
+    ).fetchall()
+
+    return render_template("profile.html", username=username, stats=stats)
 
 
 @app.route("/history")
