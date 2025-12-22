@@ -63,11 +63,11 @@ function getProblems(numProblems, difficulty) {
             break;
         case 'medium':
             min = 1;  // Allow two-digit and above
-            max = 10; // Two to three-digit numbers
+            max = 99; // Two to three-digit numbers
             break;
         case 'hard':
-            min = 1; // Allow three-digit and above
-            max = 10; // Three to four-digit numbers
+            min = 10; // Allow three-digit and above
+            max = 999; // Three to four-digit numbers
             break;
         default:
             throw new Error('Invalid difficulty level. Please use "easy", "medium", or "hard".');
