@@ -24,7 +24,7 @@ Welcome to **Miko**, a cozy web application where you can enjoy a fun and relaxi
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/miko.git
+   git clone git@github.com:anvay69/miko.git
    cd miko
    ```
 
