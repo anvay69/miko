@@ -89,8 +89,8 @@ After completing a round, JavaScript makes a POST request to update the user’s
 
 ## Security Measures
 
-**CSRF Token** Verification: Validates requests to prevent unauthorized actions.
-**Password Hashing**: Ensures user passwords are secure.
+- **CSRF Token** Verification: Validates requests to prevent unauthorized actions.
+- **Password Hashing**: Ensures user passwords are secure.
 
 
 ## Contributing
